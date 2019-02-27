@@ -4,4 +4,5 @@
 ## install:
 ```bash
 npm i -S afeiship/generator-rake-task --registry=https://registry.npm.taobao.org
+npm link
 ```
