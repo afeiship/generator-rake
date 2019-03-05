@@ -4,7 +4,7 @@ Dir.glob("./tasks/*.rake").each do |task|
 end
 
 # main task list:
-namespace :<%= namespace =%> do
+namespace :<%= namespace %> do
   # build & serve:
   desc "Serve for development"
   task :dev do
