@@ -26,6 +26,11 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'description',
         message: 'Your project description?'
+      },
+      {
+        type: 'input',
+        name: 'namespace',
+        message: 'Your project namespace(eg: npm/app )?'
       }
     ];
 
