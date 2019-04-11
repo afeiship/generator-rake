@@ -1,12 +1,12 @@
 # <%= project_name %>
 > <%= description %>
 
-## install:
+## install
 ```bash
 npm i -S afeiship/<%= project_name %> --registry=https://registry.npm.taobao.org
 ```
 
-## usage:
+## usage
 ~~~
 rake -T
 ~~~
