@@ -1,8 +1,10 @@
-# generator-rake-task
+# generator-rake
 > Yeoman for a rake task.
 
 ## install:
 ```bash
-npm i -S afeiship/generator-rake-task --registry=https://registry.npm.taobao.org
+git clone git@github.com:afeiship/generator-rake.git
+cd generator-rake
+npm i
 npm link
 ```
