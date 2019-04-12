@@ -2,15 +2,19 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const glob = require('glob');
+const { resolve } = require('path');
+const remote = require('yeoman-remote');
 const yoHelper = require('yeoman-generator-helper');
+const replace = require('replace-in-file');
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the scrumtrulescent ${chalk.red(
-          'generator-rake-task'
+        `Welcome to the stunning ${chalk.red(
+          'generator-rake'
         )} generator!`
       )
     );
@@ -19,38 +23,59 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'project_name',
-        message: 'Your project_name?',
+        message: 'Your project_name (eg: like this `react-button` )?',
         default: yoHelper.discoverRoot
       },
       {
         type: 'input',
         name: 'description',
-        message: 'Your project description?'
+        message: 'Your description?'
       },
+      ,
       {
         type: 'input',
         name: 'namespace',
-        message: 'Your project namespace(eg: npm/app )?'
+        message: 'Your namespace?'
       }
     ];
 
-    return this.prompt(prompts).then((props) => {
-      this.props = props;
-    });
+    return this.prompt(prompts).then(
+      function(props) {
+        // To access props later use this.props.someAnswer;
+        this.props = props;
+        yoHelper.rewriteProps(props);
+      }.bind(this)
+    );
   }
 
   writing() {
-    this._writingTplFiles();
-  }
-
-  _writingTplFiles() {
-    this.fs.copyTpl(
-      this.templatePath('{.*,*,**/*.rake}'),
-      this.destinationPath('.'),
-      this.props
+    const done = this.async();
+    remote(
+      'afeiship',
+      'boilerplate-rake',
+      function(err, cachePath) {
+        // copy files:
+        this.fs.copy(
+          glob.sync(resolve(cachePath, '{**,.*}')),
+          this.destinationPath()
+        );
+        done();
+      }.bind(this)
     );
   }
-  install() {
-    console.log('Enjoy coding. :)');
+
+  end() {
+    const { project_name, description, namespace } = this.props;
+    const files = glob.sync(resolve(this.destinationPath(), '{**,.*}'));
+
+    replace.sync({
+      files,
+      from: [
+        /boilerplate-rake-description/g,
+        /boilerplate_rake_namespace/g,
+        /boilerplate-rake/g,
+      ],
+      to: [description, namespace, project_name]
+    });
   }
 };
