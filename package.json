@@ -1,5 +1,5 @@
 {
-  "name": "generator-rake",
+  "name": "@feizheng/generator-rake",
   "version": "1.0.0",
   "description": "Yeoman for a rake task.",
   "homepage": "https://github.com/afeiship/generator-rake",
@@ -26,13 +26,16 @@
     "npm": ">= 4.0.0"
   },
   "dependencies": {
+    "@feizheng/yeoman-generator-helper": "^1.0.1",
     "chalk": "^2.1.0",
     "replace-in-file": "^3.4.4",
     "yeoman-generator": "^2.0.1",
-    "yeoman-generator-helper": "github:afeiship/yeoman-generator-helper",
     "yeoman-remote": "^1.0.1",
     "yosay": "^2.0.1"
   },
   "repository": "git@github.com:afeiship/generator-rake-task.git",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }

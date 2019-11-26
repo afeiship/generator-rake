@@ -1,7 +1,7 @@
 # generator-rake
 > Yeoman for a rake task.
 
-## install:
+## installation
 ```bash
 git clone git@github.com:afeiship/generator-rake.git
 cd generator-rake
